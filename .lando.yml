@@ -1,0 +1,4 @@
+name: navilandoapp
+recipe: laravel
+config:
+  webroot: /public
