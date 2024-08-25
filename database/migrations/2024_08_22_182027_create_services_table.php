@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->enum('type', ['hour_price', 'fixed_price', 'custom_price'])->default('hour_price');
             $table->decimal('price', 10, 2); // десять цифр и две после запятой
             $table->foreignId('company_id')
                   ->constrained('companies')

@@ -17,15 +17,14 @@ return new class extends Migration
                     ->constrained('company_offices')
                     ->onDelete('set null');
             $table->string('name');
-            $table->string('surname');
-            $table->string('last_name');
+            $table->string('middle_name')->nullable();
+            $table->string('last_name')->nullable();
             $table->enum('sex', ['male', 'female', 'other']);
-            $table->date('data_birthday');
+            $table->date('data_birthday')->nullable();
             $table->string('role');
             $table->string('avatar')->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->timestamps();
             $table->timestamps();
         });
     }

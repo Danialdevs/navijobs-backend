@@ -24,8 +24,8 @@ return new class extends Migration
                     ->onDelete('cascade');
             $table->string('address');
             $table->text('comment')->nullable();
-            $table->string('status');
-            $table->text('system_comment')->nullable(); 
+            $table->enum('status', ['found-worker', 'full-done', 'awaiting', 'canceled'])->default('awaiting'); //awaiting - ожидается принятие заказа, found-worker - нашли работника, full-done - выполнено, cancelled - отмена заказа
+            $table->text('system_comment')->nullable();
             $table->timestamps();
         });
     }
