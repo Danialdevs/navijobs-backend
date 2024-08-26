@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CompanyOfficesController;
 use App\Http\Controllers\Api\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,4 +16,5 @@ Route::group(["middleware" => "guest"], function (){
 });
 Route::group(["middleware" => "auth:sanctum"], function (){
     Route::resource("users", UsersController::class);
+    Route::resource("offices", CompanyOfficesController::class);
 });
