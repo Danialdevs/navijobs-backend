@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Services\CreateServiceRequest;
 use Illuminate\Http\Request;
 use App\Models\Service;
 
@@ -13,53 +14,26 @@ class ServicesController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->user()->role != 'worker') {
-            $services = Service::query();
-            if ($request->user()->role === 'company_admin') {
-                $services->where('company_id', $request->user()->company_id);
-            }
-            elseif ($request->user()->role === 'office_admin') {
-                $services->where('company_id', $request->user()->company_id);
-            }
-            elseif ($request->user()->role === 'office_manager') {
-                $services->where('company_id', $request->user()->company_id);
-            }
-
-            return response()->json([
+        $services = Service::where('company_id', $request->user()->company_id)->get();
+        return response()->json([
                 'success' => true,
-                'data' => $services->get()
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'You can\'t access this page'
-            ]);
-        }
-    }
+                'data' => $services,
+        ]);
 
+    }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateServiceRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'company_id' => 'required|exists:companies,id',
-            'price' => 'required|numeric|min:0',
-        ]);
-
-        $service = Service::create([
-            'name' => $validated['name'],
-            'description' => $validated['description'],
-            'company_id' => $validated['company_id'],
-            'price' => $validated['price'],
-        ]);
-
+        $user = $request->user();
+        if($user->role === "company_admin"){
+            $service = Service::create($request->all());
+        }
         return response()->json([
             'success' => true,
-            'data' => $service
+            'data' => $service,
         ], 201);
     }
 
@@ -73,26 +47,35 @@ class ServicesController extends Controller
         if ($service) {
             return response()->json([
                 'success' => true,
-                'data' => $service
+                'data' => $service,
             ]);
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Service not found'
+                'message' => 'Service not found',
             ], 404);
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function show(Request $request, int $id)
     {
+        $user = $request->user();
+        $service = Service::findOrFail($id);
+
+        if ($service->company_id === $user->company_id) {
+            return response()->json([
+                'success' => true,
+                'data' => $service
+            ]);
+        }
+
         return response()->json([
             'success' => false,
-            'message' => 'Not applicable for API controller'
-        ], 405);
+            'message' => "You don't have permission to access this page."
+        ]);
     }
+
+
 
     /**
      * Update the specified resource in storage.
@@ -113,12 +96,12 @@ class ServicesController extends Controller
 
             return response()->json([
                 'success' => true,
-                'data' => $service
+                'data' => $service,
             ]);
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Service not found'
+                'message' => 'Service not found',
             ], 404);
         }
     }
@@ -130,47 +113,19 @@ class ServicesController extends Controller
     {
         $service = Service::findOrFail($id);
 
-        if ($request->user()->role === 'company_admin') {
+        if (in_array($request->user()->role, ['company_admin', 'office_admin', 'office_manager']) &&
+            $service->company_id === $request->user()->company_id) {
+            $service->delete();
 
-            if ($service->company_id === $request->user()->company_id) {
-                $service->delete();
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'You don\'t have permission to delete this service.'
-                ], 403);
-            }
-        } elseif ($request->user()->role === 'office_admin') {
-            /
-            if ($service->company_id === $request->user()->company_id) {
-                $service->delete();
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'You don\'t have permission to delete this service.'
-                ], 403);
-            }
-        } elseif ($request->user()->role === 'office_manager') {
-
-            if ($service->company_id === $request->user()->company_id) {
-                $service->delete();
-            } else {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'You don\'t have permission to delete this service.'
-                ], 403);
-            }
+            return response()->json([
+                'success' => true,
+                'message' => 'The service was successfully deleted!',
+            ]);
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'You can\'t access this page'
+                'message' => 'You don\'t have permission to delete this service.',
             ], 403);
         }
-
-
-        return response()->json([
-            'success' => true,
-            'message' => 'The service was successfully deleted!'
-        ]);
     }
 }
