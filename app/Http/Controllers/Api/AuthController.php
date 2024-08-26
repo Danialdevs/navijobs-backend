@@ -19,8 +19,8 @@ class AuthController extends Controller
             return response()->json([
                 "success" => true,
                 "data" => [
-                     'access_token' => $token->plainTextToken,
-                    'user'=> $user
+                'access_token' => $token->plainTextToken,
+                'user'=> $user
                 ]
             ]);
         }
@@ -30,6 +30,4 @@ class AuthController extends Controller
                 "message" => "Unauthorized"
             ], 401);
     }
-
-
 }
