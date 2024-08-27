@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Users\CreateUserRequest;
+use App\Http\Requests\Api\Users\UpdateUserRequest;
+use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -42,9 +45,16 @@ class UsersController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
-        //
+        $user = $request->user();
+        if($user->role === "company_admin" || $user->role === "office_admin"){
+            $user = User::create($request->all());
+        }
+        return response()->json([
+            'success' => true,
+            'data' => $user,
+        ], 201);
     }
 
     /**
@@ -60,10 +70,35 @@ class UsersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+
+    public function update(UpdateUserRequest $request, string $id)
     {
-        //
+        $currentUser = $request->user();
+        $userToUpdate = User::findOrFail($id);
+
+        if ($currentUser->role === 'company_admin') {
+            // Company admin can update any user within their company
+            $userToUpdate->update($request->all());
+            return response()->json([
+                'success' => true,
+                'data' => $userToUpdate
+            ]);
+        } elseif ($currentUser->role === 'office_admin' && $userToUpdate->office_id === $currentUser->office_id) {
+            // Office admin can update users within their office
+            $userToUpdate->update($request->all());
+            return response()->json([
+                'success' => true,
+                'data' => $userToUpdate
+            ]);
+        }
+
+        // Office managers and workers or unauthorized office or company
+        return response()->json([
+            'success' => false,
+            'message' => "You don't have permission to update this user's profile."
+        ]);
     }
+
 
     /**
      * Remove the specified resource from storage.
