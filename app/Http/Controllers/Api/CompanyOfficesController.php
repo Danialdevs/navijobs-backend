@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Offices\CreateOfficeRequest;
 use App\Http\Requests\Api\Offices\UpdateOfficeRequest;
 use App\Models\CompanyOffice;
+use App\Models\Service;
 use Illuminate\Http\Request;
 
 class CompanyOfficesController extends Controller
@@ -103,4 +104,26 @@ class CompanyOfficesController extends Controller
             'message' => "You don't have permission to access this page."
         ]);
     }
+
+    public function destroy(Request $request, int $id) {
+        $user = $request->user();
+        $office = CompanyOffice::findOrFail($id);
+
+        if ($user->role === 'company_admin' &&
+            $office->company_id === $request->user()->company_id) {
+            $office->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'The office was successfully deleted!',
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'You don\'t have permission to delete this office.',
+            ], 403);
+        }
+    }
+
+
 }
