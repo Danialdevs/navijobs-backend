@@ -60,18 +60,46 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, int $id)
     {
-        //
+        $currentUser = $request->user();
+
+        // Find the user by ID
+        $user = User::findOrFail($id);
+
+        // Check if the current user is authorized to view the user
+        if ($currentUser->role === 'company_admin' && $currentUser->company_id === $user->company_id) {
+            // Company admin can view any user within their company
+            return response()->json([
+                'success' => true,
+                'data' => $user
+            ]);
+        } elseif ($currentUser->role === 'office_admin' && $currentUser->office_id === $user->office_id) {
+            // Office admin can view any user within their office
+            return response()->json([
+                'success' => true,
+                'data' => $user
+            ]);
+        } elseif ($currentUser->role === 'office_manager' && $currentUser->office_id === $user->office_id && $user->role === 'worker') {
+            // Office manager can view workers within their office
+            return response()->json([
+                'success' => true,
+                'data' => $user
+            ]);
+        } else {
+            // Unauthorized access
+            return response()->json([
+                'success' => false,
+                'message' => "You don't have permission to view this user's profile."
+            ], 403);
+        }
     }
-
-
 
     /**
      * Update the specified resource in storage.
      */
 
-    public function update(UpdateUserRequest $request, string $id)
+    public function update(UpdateUserRequest $request, int $id)
     {
         $currentUser = $request->user();
         $userToUpdate = User::findOrFail($id);

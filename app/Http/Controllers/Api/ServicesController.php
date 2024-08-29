@@ -95,7 +95,7 @@ class ServicesController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => "You don't have permission to access this page."
-            ], 403); /
+            ], 403);
         }
 
         $service->delete();

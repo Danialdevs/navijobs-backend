@@ -22,22 +22,15 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
+            'name' => 'string',
             'middle_name' => 'nullable|string',
             'last_name' => 'nullable|string',
-            'sex'=> 'required|enum',
+            'sex'=> 'string',
             'data_birthday' => 'nullable|date',
             'avatar' => 'nullable|string',
-            'email' => 'required|string|email|unique:users,email',
-            'password' => 'required|string|confirmed',
-            'role' => 'required|enum'
+            'email' => 'email|unique:users,email',
+            'role' => 'string'
         ];
     }
 
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'office_id' => $this->user()->office_id // Add company_id to the request data
-        ]);
-    }
 }
