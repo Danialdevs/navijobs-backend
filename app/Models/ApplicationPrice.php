@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ApplicationPrice extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['application_id', 'price'];
 }

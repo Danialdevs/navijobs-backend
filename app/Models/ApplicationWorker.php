@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ApplicationWorker extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['user_id', 'application_id'];
 }
+
