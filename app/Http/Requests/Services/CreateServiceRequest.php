@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Offices;
+namespace App\Http\Requests\Services;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateOfficeRequest extends FormRequest
+class CreateServiceRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -15,7 +15,8 @@ class CreateOfficeRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
         ];
     }
 

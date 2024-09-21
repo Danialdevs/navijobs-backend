@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\Users;
+namespace App\Http\Requests\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -29,7 +29,7 @@ class CreateUserRequest extends FormRequest
             'data_birthday' => 'nullable|date',
             'avatar' => 'nullable|string',
             'email' => 'required|string|email|unique:users,email',
-            'password' => 'required|string|confirmed',
+            'password' => 'required|string',
         ];
     }
 
