@@ -17,6 +17,7 @@ class AuthController extends Controller
         if($user){
             return "good";
         }else{
+            session()->flash('error', 'Неверные данные для входа.');
             return Redirect::back();
         }
     }

@@ -22,6 +22,11 @@
 
                     <a href="#" class="text-sm text-blue-500 hover:underline">Забыли пароль?</a>
                 </div>
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
 
                 <button type="submit"   style="display: block; width: 100%; background-color: #FF6B00; color: white; padding: 10px; border-radius: 502.31px;">
                     Войти
