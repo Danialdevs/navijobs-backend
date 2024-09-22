@@ -10,4 +10,6 @@ class CompanyOffice extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'address', 'company_id'];
+
+
 }

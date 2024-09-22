@@ -13,4 +13,61 @@
             <!-- Добавим здесь элемент canvas для гистограммы -->
             <canvas id="myBarChart" width="520" height="130" style="display: block; box-sizing: border-box; height: 65px; width: 260px;"></canvas>
         </div>
+
+        <script>
+            // Скрипт для создания линейного графика
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                    datasets: [{
+                        label: 'Средний чек ( $ )',
+                        data: [500, 1000, 1500, 2000, 2400, 1800, 1200, 800, 2200, 1300, 1700, 900],
+                        backgroundColor: 'rgba(255, 107, 0, 0.2)',
+                        borderColor: '#FFC700',
+                        borderWidth: 2,
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 2400,
+                            ticks: {
+                                stepSize: 600
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Скрипт для создания гистограммы
+            const ctxBar = document.getElementById('myBarChart').getContext('2d');
+            const myBarChart = new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                    datasets: [{
+                        label: 'Объем продаж (кол-во)',
+                        data: [50, 100, 150, 200, 250, 300, 50, 100, 150, 200, 250, 300],
+                        backgroundColor: ' rgba(255, 206, 133, 0.5)',
+                        borderColor: '#FFCE85',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 300,
+                            ticks: {
+                                stepSize: 60
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
 @endsection

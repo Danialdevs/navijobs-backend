@@ -18,9 +18,9 @@ class WorkersController extends Controller
             if (Auth::user()->role === 'company_admin') {
                 $users->where('company_office_id', Auth::user()->company_office_id)
                     ->whereHas('companyOffice', function ($query) {
-                        $query->where('company_office_id', Auth::user()->companyOffice()->company_id);
+                        $query->where('company_id', Auth::user()->companyOffice->company_id);
                     });
-                $offices->where('company_office_id', Auth::user()->companyOffice()->company_id);
+                $offices->where('company_id', Auth::user()->companyOffice->company_id);
 
             } elseif (Auth::user()->role === 'office_admin') {
                 $users->where('company_office_id', Auth::user()->company_office_id);

@@ -27,7 +27,6 @@
                         {{ session('error') }}
                     </div>
                 @endif
-
                 <button type="submit"   style="display: block; width: 100%; background-color: #FF6B00; color: white; padding: 10px; border-radius: 502.31px;">
                     Войти
                 </button>
