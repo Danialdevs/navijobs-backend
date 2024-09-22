@@ -14,11 +14,12 @@
                             </button>
                         </li>
                         <li>
-                            <button onclick="window.location.href='{{ route('report') }}'" class="btn-sidebar flex items-center">
-                                <img   src="{{asset("images/activity.svg")}}"  alt="">
-                                <span class="ml-2">Отчеты</span>
+                            <button onclick="window.location.href='{{ route('services-index') }}'" class="btn-sidebar flex items-center">
+                                <img   src="{{asset("images/services.svg")}}"  alt="">
+                                <span class="ml-2">Услуги</span>
                             </button>
                         </li>
+
                         <li>
                             <button onclick="window.location.href='{{ route('workers-index') }}'" class="btn-sidebar flex items-center">
                                 <img  src="{{asset("images/profile-2user.svg")}}"  class="h-6 w-6" alt="">

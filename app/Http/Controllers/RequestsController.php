@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
+
 class RequestsController extends Controller
 {
     public function index()
     {
-        return view('Pages.requests.index');
+        $applications = Application::all();
+        return view('Pages.requests.index', compact('applications'));
     }
 }

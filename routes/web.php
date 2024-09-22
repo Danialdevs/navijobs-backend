@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\WorkersController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/', [WorkersController::class, 'store'])->name('store');
     });
 
+    Route::group(['prefix' => 'services', 'as' => 'services-'], function () {
+        Route::get('/', [ServiceController::class, 'index'])->name('index');
+    });
     Route::get('/report', [ReportController::class, 'index'])->name('report');
     Route::get('/request', [\App\Http\Controllers\RequestsController::class, 'index'])->name('request');
 });
