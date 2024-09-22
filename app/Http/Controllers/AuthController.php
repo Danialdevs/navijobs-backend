@@ -12,12 +12,15 @@ class AuthController extends Controller
     {
         return view('Pages/auth');
     }
-    public function AuthAction(AuthRequest $request){
-        $user = Auth::attempt($request->only('email','password'));
-        if($user){
-            return "good";
-        }else{
+
+    public function AuthAction(AuthRequest $request)
+    {
+        $user = Auth::attempt($request->only('email', 'password'));
+        if ($user) {
+            return 'good';
+        } else {
             session()->flash('error', 'Неверные данные для входа.');
+
             return Redirect::back();
         }
     }

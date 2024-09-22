@@ -25,12 +25,11 @@ class UpdateUserRequest extends FormRequest
             'name' => 'string',
             'middle_name' => 'nullable|string',
             'last_name' => 'nullable|string',
-            'sex'=> 'string',
+            'sex' => 'string',
             'data_birthday' => 'nullable|date',
             'avatar' => 'nullable|string',
             'email' => 'email|unique:users,email',
-            'role' => 'string'
+            'role' => 'string',
         ];
     }
-
 }

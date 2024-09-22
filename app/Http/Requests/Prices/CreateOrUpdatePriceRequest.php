@@ -25,6 +25,3 @@ class CreateOrUpdatePriceRequest extends FormRequest
         ]);
     }
 }
-
-
-

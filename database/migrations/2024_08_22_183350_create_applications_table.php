@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_office_id')
-                    ->constrained('company_offices')
-                    ->onDelete('cascade');
+                ->constrained('company_offices')
+                ->onDelete('cascade');
             $table->foreignId('client_id')
-                    ->constrained('clients')
-                    ->onDelete('cascade');
+                ->constrained('clients')
+                ->onDelete('cascade');
             $table->foreignId('service_id')
-                    ->constrained('services')
-                    ->onDelete('cascade');
+                ->constrained('services')
+                ->onDelete('cascade');
             $table->string('address');
             $table->text('comment')->nullable();
             $table->enum('status', ['found-worker', 'full-done', 'awaiting', 'canceled'])->default('awaiting'); //awaiting - ожидается принятие заказа, found-worker - нашли работника, full-done - выполнено, cancelled - отмена заказа

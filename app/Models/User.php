@@ -3,17 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
     protected $hidden = [
-        'password'
+        'password',
     ];
 
     protected $fillable = [
@@ -26,11 +24,11 @@ class User extends Authenticatable
         'role',
         'office_id',
         'avatar',
-        'company_id'
+        'company_id',
     ];
 
     public function getfioAttribute()
     {
-        return $this->last_name . " " . $this->name . " " . $this->middle_name;
+        return $this->last_name.' '.$this->name.' '.$this->middle_name;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Requests\Workers;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -18,6 +19,3 @@ class CreateWorkerRequest extends FormRequest
         ];
     }
 }
-
-
-

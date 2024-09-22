@@ -17,8 +17,8 @@ return new class extends Migration
             $table->enum('type', ['hour_price', 'fixed_price', 'custom_price'])->default('hour_price');
             $table->decimal('price', 10, 2); // десять цифр и две после запятой
             $table->foreignId('company_id')
-                  ->constrained('companies')
-                  ->onDelete('cascade');
+                ->constrained('companies')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

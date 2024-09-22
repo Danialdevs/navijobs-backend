@@ -7,9 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class UpdateServiceRequest extends FormRequest
 {
     /**
-
      *Get the validation rules that apply to the request.
-     * @return bool
      */
     public function authorize(): bool
     {
@@ -19,6 +17,7 @@ class UpdateServiceRequest extends FormRequest
 
     /**
      * Prepare the data for validation.
+     *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
@@ -29,7 +28,6 @@ class UpdateServiceRequest extends FormRequest
             'price' => 'sometimes|required|numeric|min:0',
         ];
     }
-
 
     protected function prepareForValidation()
     {

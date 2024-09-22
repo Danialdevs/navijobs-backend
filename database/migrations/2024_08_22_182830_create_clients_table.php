@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('phone_number')->unique();
             $table->string('tg_id')->nullable();
             $table->foreignId('company_id')
-                  ->constrained('companies')
-                  ->onDelete('cascade');
+                ->constrained('companies')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('comment')->nullable();
             $table->integer('stars')->nullable();
             $table->foreignId('application_id')
-                 ->constrained('applications');
+                ->constrained('applications');
             $table->timestamps();
         });
     }

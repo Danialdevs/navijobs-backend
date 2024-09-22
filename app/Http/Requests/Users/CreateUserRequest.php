@@ -39,7 +39,7 @@ class CreateUserRequest extends FormRequest
     {
         $this->merge([
             'office_id' => $this->user()->office_id, // Add company_id to the request data
-            'role' => $this->user()->role
+            'role' => $this->user()->role,
         ]);
     }
 }

@@ -14,7 +14,7 @@ class UpdateApplicationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => 'string'
+            'status' => 'string',
         ];
     }
 }

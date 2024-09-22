@@ -27,4 +27,3 @@ class UpdateOfficeRequest extends FormRequest
         ]);
     }
 }
-
