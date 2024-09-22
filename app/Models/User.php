@@ -22,13 +22,17 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
-        'office_id',
         'avatar',
-        'company_id',
+        'company_office_id',
     ];
 
     public function getfioAttribute()
     {
         return $this->last_name.' '.$this->name.' '.$this->middle_name;
+    }
+
+    public function companyOffice()
+    {
+        return $this->belongsTo(CompanyOffice::class, 'company_office_id');
     }
 }

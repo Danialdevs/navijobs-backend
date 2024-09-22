@@ -28,9 +28,8 @@ class CreateUserRequest extends FormRequest
             'phone' => 'required|string|max:15',
             'email' => 'required|string|email|unique:users,email|max:255',
             'password' => 'required|string|min:8',
-            'role' => 'required|string|in:worker,company_admin,office_manager',
-            'office_id' => 'nullable|exists:offices,id',
-            'company_id' => 'nullable|exists:companies,id',
+            'role' => 'required|string|in:worker,company_admin,office_admin,office_manager',
+            'company_office_id' => 'nullable|exists:offices,id',
         ];
 
     }
@@ -38,8 +37,7 @@ class CreateUserRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'office_id' => $this->user()->office_id, // Add company_id to the request data
-            'role' => $this->user()->role,
+//            'office_id' => $this->user()->office_id, // Add company_id to the request data
         ]);
     }
 }
