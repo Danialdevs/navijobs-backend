@@ -14,7 +14,7 @@
                 <h3 class="text-xl font-bold mb-4">{{ $user->getfioAttribute() }}</h3>
                 <img src="https://i.ibb.co/VHH493m/user.png" alt="" class="w-40 h-40 rounded-full border border-gray-300 mb-4">
                 <a href="{{route("workers-show", $user->id)}}" class="shadow appearance-none btn-card py-2 px-4 rounded-lg flex items-center" style="background-color: #ffffff; color: #123E63">
-                    перейти
+                    Перейти
                 </a>
             </div>
         @endforeach
@@ -23,8 +23,8 @@
     <div id="workerModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden">
         <div class="bg-white rounded-lg shadow-lg p-6" style="width: 800px; border-radius: 35px; border: #FF6B00 solid 2px;">
             <h2 class="text-xl font-bold mb-4 " style="color:#123E63">Добавить работника</h2>
-            <form id="workerForm" action="{{ route('workers-store') }}" method="post">
-                @csrf
+            <form id="workerForm" action="{{ route('workers-store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
                 <div class="flex flex-wrap mx-3 mb-4">
                     <div class="w-full md:w-1/2 px-3">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="photo">Фото:</label>
@@ -53,6 +53,11 @@
                             <input name="phone" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text" placeholder="Введите телефон" required>
                         </div>
                         <div class="mb-4">
+                            <input name="role" id="role" type="hidden" value="worker" >
+                            <input name="office_id" id="office_id" type="hidden" value="{{Auth::user()->office_id}}" >
+                            <input type="hidden" name="company_id" id="company_id" value="{{ Auth::user()->company_id }}">
+                        </div>
+                        <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Адрес электронной почты:</label>
                             <input name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Введите адрес" required>
                         </div>
@@ -77,10 +82,12 @@
     <script>
         document.getElementById('addWorkerBtn').addEventListener('click', function () {
             document.getElementById('workerModal').classList.remove('hidden');
+            console.log('you clicked the addworkerbtn');
         });
 
         document.getElementById('closeModalBtn').addEventListener('click', function () {
             document.getElementById('workerModal').classList.add('hidden');
+
         });
 
         document.getElementById('uploadPhotoBtn').addEventListener('click', function () {

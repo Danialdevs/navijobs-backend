@@ -22,15 +22,17 @@ class CreateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'middle_name' => 'nullable|string',
-            'last_name' => 'nullable|string',
-            'sex'=> 'required|enum',
-            'data_birthday' => 'nullable|date',
-            'avatar' => 'nullable|string',
-            'email' => 'required|string|email|unique:users,email',
-            'password' => 'required|string',
+            'name' => 'required|string|max:255',
+            'middle_name' => 'nullable|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'phone' => 'required|string|max:15',
+            'email' => 'required|string|email|unique:users,email|max:255',
+            'password' => 'required|string|min:8',
+            'role' => 'required|string|in:worker,company_admin,office_manager',
+            'office_id' => 'nullable|exists:offices,id',
+            'company_id' => 'nullable|exists:companies,id',
         ];
+
     }
 
     protected function prepareForValidation()

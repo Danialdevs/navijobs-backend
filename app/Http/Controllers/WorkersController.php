@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Redirect;
 class WorkersController extends Controller
 {
     public function index()
+
     {
          if (Auth::user()->role != 'worker') {
     $users = User::query();
@@ -34,8 +35,24 @@ class WorkersController extends Controller
 
     }
     public function store(CreateUserRequest $request){
-        User::create($request->all());
+        $data = $request->all();
+
+        // Hash the password
+        $data['password'] = bcrypt($request->password);
+
+        // Handle photo upload
+        if ($request->hasFile('avatar')) {
+            $filePath = $request->file('avatar')->store('avatars', 'public');
+            $data['avatar'] = $filePath;
+        }
+
+        // Create user
+        User::create($data);
+
+        return redirect()->back()->with('success', 'Worker added successfully');
     }
+
+
     public function show($id)
     {
         $user = User::findOrFail($id);

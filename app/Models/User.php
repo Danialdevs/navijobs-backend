@@ -17,8 +17,18 @@ class User extends Authenticatable
     ];
 
     protected $fillable = [
-        'name', 'last_name', 'middle_name', 'sex', 'data_birthday', 'avatar', 'email', 'role'
+        'name',
+        'last_name',
+        'middle_name',
+        'phone',
+        'email',
+        'password',
+        'role',
+        'office_id',
+        'avatar',
+        'company_id'
     ];
+
     public function getfioAttribute()
     {
         return $this->last_name . " " . $this->name . " " . $this->middle_name;
