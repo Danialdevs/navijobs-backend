@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\WorkersController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RequestsController;
 
 
 
@@ -19,4 +21,6 @@ Route::group(["middleware" => ["auth"]], function () {
        Route::get("/{id}", [WorkersController::class, "show"])->name("show");
        Route::post("/", [WorkersController::class, "store"])->name("store");
    });
+   Route::get("/report", [ReportController::class, "index"])->name("report");
+   Route::get("/request", [\App\Http\Controllers\RequestsController::class, "index"])->name("request");
 });
