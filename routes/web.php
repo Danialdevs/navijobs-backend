@@ -17,6 +17,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'workers', 'as' => 'workers-'], function () {
         Route::get('/', [WorkersController::class, 'index'])->name('index');
         Route::get('/{id}', [WorkersController::class, 'show'])->name('show');
+        Route::put('/{id}', [WorkersController::class, 'update'])->name('update');
+        Route::delete('/{id}', [WorkersController::class, 'destroy'])->name('destroy');
         Route::post('/', [WorkersController::class, 'store'])->name('store');
     });
 
@@ -25,4 +27,5 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::get('/report', [ReportController::class, 'index'])->name('report');
     Route::get('/request', [\App\Http\Controllers\RequestsController::class, 'index'])->name('request');
+
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Users\CreateUserRequest;
+use App\Http\Requests\Users\UpdateUserRequest;
 use App\Models\CompanyOffice;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -42,10 +43,6 @@ class WorkersController extends Controller
     public function store(CreateUserRequest $request)
     {
         $data = $request->all();
-
-
-
-
         User::create($data);
 
         return redirect()->back()->with('success', 'Worker added successfully');
@@ -56,5 +53,21 @@ class WorkersController extends Controller
         $user = User::findOrFail($id);
 
         return view('Pages.Workers.show', compact('user'));
+    }
+
+    public function update(UpdateUserRequest $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $user->update($request->all());
+
+        return redirect()->route('workers-show', $user->id)->with('success', 'Worker updated successfully.');
+    }
+
+    public function destroy($id) {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('workers-index')->with('success', 'Worker deleted successfully.');
     }
 }

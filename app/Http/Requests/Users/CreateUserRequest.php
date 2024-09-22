@@ -29,7 +29,9 @@ class CreateUserRequest extends FormRequest
             'email' => 'required|string|email|unique:users,email|max:255',
             'password' => 'required|string|min:8',
             'role' => 'required|string|in:worker,company_admin,office_admin,office_manager',
-            'company_office_id' => 'nullable|exists:offices,id',
+            'company_office_id' => 'nullable|exists:company_offices,id',
+            'sex'=>'nullable|in:male,female',
+            'data_birthday'=>'nullable|date',
         ];
 
     }

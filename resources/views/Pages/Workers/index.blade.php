@@ -45,6 +45,24 @@
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="surname">Отчество:</label>
                         <input name="middle_name" value="{{ old('middle_name') }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="surname" type="text" placeholder="Введите отчество">
                     </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="gender">Пол:</label>
+                        <select name="sex" id="sex" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('gender') border-red-500 @enderror" required>
+                            <option value="" disabled selected>Выберите пол</option>
+                            <option value="male" {{ old('sex') == 'male' ? 'selected' : '' }}>Мужской</option>
+                            <option value="female" {{ old('sex') == 'female' ? 'selected' : '' }}>Женский</option>
+                        </select>
+                        @error('sex')
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="data_birthday">Дата рождения:</label>
+                        <input name="data_birthday" value="{{ old('data_birthday') }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('birth_date') border-red-500 @enderror" id="birth_date" type="date" placeholder="Введите дату рождения" required>
+                        @error('data_birthday')
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
                 </div>
                 <div class="w-full md:w-1/2 px-3">
                     <div class="mb-4">
@@ -56,13 +74,13 @@
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="office_id">Офис:</label>
-                        <select name="office_id" id="office_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('office_id') border-red-500 @enderror" required>
+                        <select name="company_office_id" id="office_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('office_id') border-red-500 @enderror" required>
                             <option value="" disabled selected>Выберите офис</option>
                             @foreach($offices as $office)
-                                <option value="{{ $office->id }}" {{ old('office_id') == $office->id ? 'selected' : '' }}>{{ $office->name }}</option>
+                                <option value="{{ $office->id }}" {{ old('company_office_id') == $office->id ? 'selected' : '' }}>{{ $office->name }}</option>
                             @endforeach
                         </select>
-                        @error('office_id')
+                        @error('company_office_id')
                             <span class="text-red-500 text-xs">{{ $message }}</span>
                         @enderror
                     </div>

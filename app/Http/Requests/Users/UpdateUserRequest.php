@@ -22,14 +22,16 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'string',
-            'middle_name' => 'nullable|string',
-            'last_name' => 'nullable|string',
-            'sex' => 'string',
+            'name' => 'required|string|max:255',
+            'middle_name' => 'nullable|string|max:255',
+            'last_name' => 'nullable|string|max:255',
+            'phone' => 'required|string|max:15',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $this->route('id'),
+            'password' => 'nullable|string|min:8', // Make password nullable for updates
+            'role' => 'required|string|in:worker,company_admin,office_admin,office_manager',
+            'company_office_id' => 'nullable|exists:company_offices,id',
+            'sex' => 'nullable|in:male,female',
             'data_birthday' => 'nullable|date',
-            'avatar' => 'nullable|string',
-            'email' => 'email|unique:users,email',
-            'role' => 'string',
         ];
     }
 }

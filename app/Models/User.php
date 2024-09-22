@@ -24,6 +24,8 @@ class User extends Authenticatable
         'role',
         'avatar',
         'company_office_id',
+        'data_birthday',
+        'sex'
     ];
 
     public function getfioAttribute()
