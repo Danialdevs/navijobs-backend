@@ -16,16 +16,16 @@ class WorkersController extends Controller
             $users = User::query();
             $offices = CompanyOffice::query();
             if (Auth::user()->role === 'company_admin') {
-                $users->where('company_office_id', Auth::user()->office_id)
+                $users->where('company_office_id', Auth::user()->company_office_id)
                     ->whereHas('companyOffice', function ($query) {
-                        $query->where('company_id', Auth::user()->companyOffice()->company_id);
+                        $query->where('company_office_id', Auth::user()->companyOffice()->company_id);
                     });
-                $offices->where('company_id', Auth::user()->companyOffice()->company_id);
+                $offices->where('company_office_id', Auth::user()->companyOffice()->company_id);
 
             } elseif (Auth::user()->role === 'office_admin') {
-                $users->where('company_office_id', Auth::user()->office_id);
+                $users->where('company_office_id', Auth::user()->company_office_id);
             } elseif (Auth::user()->role === 'office_manager') {
-                $users->where('company_office_id', Auth::user()->office_id)
+                $users->where('company_office_id', Auth::user()->company_office_id)
                     ->where('role', 'worker');
             }
 
