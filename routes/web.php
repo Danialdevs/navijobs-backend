@@ -25,9 +25,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group(['prefix' => 'services', 'as' => 'services-'], function () {
         Route::get('/', [ServiceController::class, 'index'])->name('index');
+        Route::get('/{id}', [ServiceController::class, 'show'])->name('show');
+        Route::put('/{id}', [ServiceController::class, 'update'])->name('update');
+        Route::delete('/{id}', [ServiceController::class, 'destroy'])->name('destroy');
+        Route::post('/', [ServiceController::class, 'store'])->name('store');
     });
     Route::get('/report', [ReportController::class, 'index'])->name('report');
     Route::get('/request', [\App\Http\Controllers\RequestsController::class, 'index'])->name('request');
-    Route::get('/services', [ServiceController::class, 'index'])->name('services');
 
 });

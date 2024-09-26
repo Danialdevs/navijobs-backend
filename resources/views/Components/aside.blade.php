@@ -14,7 +14,7 @@
                             </button>
                         </li>
                         <li>
-                            <button onclick="window.location.href='{{ route('services') }}'" class="btn-sidebar flex items-center">
+                            <button onclick="window.location.href='{{ route('services-index') }}'" class="btn-sidebar flex items-center">
                                 <img   src="{{asset("images/services.svg")}}"  alt="">
                                 <span class="ml-2">Услуги</span>
                             </button>
