@@ -28,5 +28,6 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::get('/report', [ReportController::class, 'index'])->name('report');
     Route::get('/request', [\App\Http\Controllers\RequestsController::class, 'index'])->name('request');
+    Route::get('/services', [ServiceController::class, 'index'])->name('services');
 
 });

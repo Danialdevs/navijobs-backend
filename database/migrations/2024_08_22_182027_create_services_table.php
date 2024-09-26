@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->enum('type', ['hour_price', 'fixed_price', 'custom_price'])->default('hour_price');
             $table->decimal('price', 10, 2); // десять цифр и две после запятой
+            $table->string('image')->nullable(); // New column for images
             $table->foreignId('company_id')
                 ->constrained('companies')
                 ->onDelete('cascade');
