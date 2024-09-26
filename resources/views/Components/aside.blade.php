@@ -28,10 +28,13 @@
                         </li>
                     </ul>
                     <div class="login-button mt-auto">
+                        <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                            @csrf
                         <button onclick="window.location.href='login.html'" class="btn-sidebar flex items-center">
                             <img  src="{{asset("images/exit.svg")}}"  class="h-6 w-6" alt="">
-                            <span class="ml-2" style="color: #FF6B00;">Войти</span>
+                            <span class="ml-2">Выйти</span>
                         </button>
+                        </form>
                     </div>
                 </nav>
             </aside>

@@ -18,11 +18,18 @@ class AuthController extends Controller
     {
         $user = Auth::attempt($request->only('email', 'password'));
         if ($user) {
-            return 'good';
+           return view('Pages/dashboard.index');
         } else {
             session()->flash('error', 'Неверные данные для входа.');
 
             return Redirect::back();
         }
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('auth-page');
+    }
+
 }

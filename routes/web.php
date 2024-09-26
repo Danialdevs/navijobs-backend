@@ -13,6 +13,7 @@ Route::group(['middleware' => ['guest']], function () {
 });
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [DashboardController::class, 'HomePage'])->name('home');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::group(['prefix' => 'workers', 'as' => 'workers-'], function () {
         Route::get('/', [WorkersController::class, 'index'])->name('index');
