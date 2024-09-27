@@ -15,6 +15,7 @@ class UpdateApplicationRequest extends FormRequest
     {
         return [
             'status' => 'string',
+
         ];
     }
 }

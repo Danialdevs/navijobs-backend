@@ -7,6 +7,7 @@ use App\Http\Requests\Users\UpdateUserRequest;
 use App\Models\CompanyOffice;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
 class WorkersController extends Controller

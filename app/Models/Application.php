@@ -16,4 +16,17 @@ class Application extends Model
     {
         return $this->hasMany(ApplicationPrice::class);
     }
+
+    // Relationship with ApplicationWorker
+    public function assignedWorker()
+    {
+        return $this->hasOne(ApplicationWorker::class);
+    }
+
+    // Define the relationship to the Service model
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'service_id');
+    }
+
 }

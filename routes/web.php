@@ -30,7 +30,20 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('/{id}', [ServiceController::class, 'destroy'])->name('destroy');
         Route::post('/', [ServiceController::class, 'store'])->name('store');
     });
+
+    Route::group(['prefix' => 'requests', 'as' => 'request-'], function () {
+        Route::get('/request', [\App\Http\Controllers\RequestsController::class, 'index'])->name('index');
+        Route::get('/{id}', [\App\Http\Controllers\RequestsController::class, 'show'])->name('show');
+        Route::put('/{id}', [\App\Http\Controllers\RequestsController::class, 'update'])->name('update');
+        Route::delete('/{id}', [\App\Http\Controllers\RequestsController::class, 'destroy'])->name('destroy');
+        Route::post('/', [\App\Http\Controllers\RequestsController::class, 'store'])->name('store');
+        Route::post('/{id}/change-status', [\App\Http\Controllers\RequestsController::class, 'changeStatus'])->name('change-status');
+        Route::post('/{id}/assign-worker', [\App\Http\Controllers\RequestsController::class, 'assignWorker'])->name('assign-worker');
+
+
+    });
     Route::get('/report', [ReportController::class, 'index'])->name('report');
-    Route::get('/request', [\App\Http\Controllers\RequestsController::class, 'index'])->name('request');
+
+
 
 });

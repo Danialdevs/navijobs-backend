@@ -3,17 +3,23 @@
 @section("content")
     <div class="flex justify-between">
         <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Рабочие</h1>
-        <button id="addWorkerBtn" class="shadow appearance-none btn-card py-2 px-4 rounded-lg flex items-center ml-2" style="background-color: #ffffff; color:#123E63">
-            добавить
-        </button>
+
+        @if(auth()->user() && in_array(auth()->user()->role, ['company_admin', 'office_admin']))
+            <button id="addWorkerBtn" class="shadow appearance-none btn-card py-2 px-4 rounded-lg flex items-center ml-2" style="background-color: #ffffff; color:#123E63">
+                Добавить
+            </button>
+        @endif
     </div>
+
 
     <div class="flex flex-wrap gap-3">
         @foreach($users as $user)
-            <div class="bg-white rounded-xl shadow-md p-6 flex flex-col items-center w-full sm:w-1/2 md:w-1/3 lg:w-1/4" style="height: 309px;">
-                <h3 class="text-xl font-bold mb-4">{{ $user->getfioAttribute() }}</h3>
-                <img src="https://i.ibb.co/VHH493m/user.png" alt="" class="w-40 h-40 rounded-full border border-gray-300 mb-4">
-                <a href="{{route("workers-show", $user->id)}}" class="shadow appearance-none btn-card py-2 px-4 rounded-lg flex items-center" style="background-color: #ffffff; color: #123E63">
+            <div class="bg-white rounded-xl shadow-md p-6 flex flex-col justify-between items-center w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
+                <div class="flex flex-col items-center flex-grow">
+                    <h3 class="text-xl font-bold mb-4">{{ $user->getfioAttribute() }}</h3>
+                    <img src="https://i.ibb.co/VHH493m/user.png" alt="" class="w-40 h-40 rounded-full border border-gray-300 mb-4">
+                </div>
+                <a href="{{route('workers-show', $user->id)}}" class="shadow appearance-none btn-card py-2 px-4 rounded-lg flex items-center" style="background-color: #ffffff; color: #123E63">
                     Перейти
                 </a>
             </div>

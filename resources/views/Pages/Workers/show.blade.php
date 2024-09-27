@@ -23,29 +23,32 @@
     <div class="mt-4 flex gap-2">
         <!-- Back Button -->
         <a href="{{ url()->previous() }}"
-           class="text-white font-bold py-2 px-6 rounded-lg flex items-center justify-center w-40 h-10 transition duration-300 ease-in-out"
-           style="background-color: #FF6B00; hover:background-color: #FF8A33;">
+           class="text-white font-bold py-2 px-6 rounded-lg flex items-center justify-center transition duration-300 ease-in-out"
+           style="background-color: #FF6B00; hover:background-color: #FF8A33; width: 180px; height: 44px;">
             Назад
         </a>
 
-        <!-- Edit Button -->
-        <button id="editWorkerBtn"
-                class="text-white font-bold py-2 px-6 rounded-lg flex items-center justify-center w-40 h-10 transition duration-300 ease-in-out"
-                style="background-color: #FF6B00; hover:background-color: #FF8A33;">
-            Отредактировать данные
-        </button>
-
-        <!-- Delete Button -->
-        <form action="{{ route('workers-destroy', $user->id) }}" method="POST" onsubmit="return confirm('Вы уверены, что хотите удалить этого рабочего?');" class="flex items-center">
-            @csrf
-            @method('DELETE')
-            <button type="submit"
-                    class="text-white font-bold py-2 px-6 rounded-lg flex items-center justify-center w-40 h-10 transition duration-300 ease-in-out"
-                    style="background-color: #FF6B00; hover:background-color: #FF8A33;">
-                Удалить рабочего
+        @if(auth()->user() && in_array(auth()->user()->role, ['company_admin', 'office_admin']))
+            <!-- Edit Button -->
+            <button id="editWorkerBtn"
+                    class="text-white font-bold py-2 px-6 rounded-lg flex items-center justify-center transition duration-300 ease-in-out"
+                    style="background-color: #FF6B00; hover:background-color: #FF8A33; width: 180px; height: 44px;">
+                Отредактировать данные
             </button>
-        </form>
+
+            <!-- Delete Button -->
+            <form action="{{ route('workers-destroy', $user->id) }}" method="POST" onsubmit="return confirm('Вы уверены, что хотите удалить этого рабочего?');" class="flex items-center">
+                @csrf
+                @method('DELETE')
+                <button type="submit"
+                        class="text-white font-bold py-2 px-6 rounded-lg flex items-center justify-center transition duration-300 ease-in-out"
+                        style="background-color: #FF6B00; hover:background-color: #FF8A33; width: 180px; height: 44px;">
+                    Удалить рабочего
+                </button>
+            </form>
+        @endif
     </div>
+
 
 
 

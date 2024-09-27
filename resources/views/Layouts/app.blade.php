@@ -84,7 +84,6 @@
         }
 
         .circle {
-            display: block;
             width: 63px;
             height: 63px;
             background-color: white;
