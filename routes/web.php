@@ -46,4 +46,10 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
+
+    Route::get('/bot', [\App\Http\Controllers\TelegramBotController::class, 'handle']);
+
+
+
+
 });

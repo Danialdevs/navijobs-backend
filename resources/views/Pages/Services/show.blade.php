@@ -27,32 +27,36 @@
     </div>
 
     <!-- Buttons Section -->
-    <div class="mt-4 flex gap-2">
-        <!-- Back Button -->
-        <a href="{{ url()->previous() }}"
-           class="text-white font-bold py-2 px-8 rounded-lg flex items-center justify-center w-48 h-12 transition duration-300 ease-in-out"
-           style="background-color: #FF6B00;">
-            Назад
-        </a>
+    <!-- Buttons Section -->
+    @if(Auth::user()->role == 'company_admin')
+        <div class="mt-4 flex gap-2">
+            <!-- Back Button -->
+            <a href="{{ url()->previous() }}"
+               class="text-white font-bold py-2 px-8 rounded-lg flex items-center justify-center w-48 h-12 transition duration-300 ease-in-out"
+               style="background-color: #FF6B00;">
+                Назад
+            </a>
 
-        <!-- Edit Button -->
-        <button id="editServiceBtn"
-                class="text-white font-bold py-2 px-8 rounded-lg flex items-center justify-center w-48 h-12 transition duration-300 ease-in-out"
-                style="background-color: #FF6B00;">
-            Редактировать
-        </button>
-
-        <!-- Delete Button -->
-        <form action="{{ route('services-destroy', $service->id) }}" method="POST" onsubmit="return confirm('Вы уверены, что хотите удалить эту услугу?');" class="flex items-center">
-            @csrf
-            @method('DELETE')
-            <button type="submit"
+            <!-- Edit Button -->
+            <button id="editServiceBtn"
                     class="text-white font-bold py-2 px-8 rounded-lg flex items-center justify-center w-48 h-12 transition duration-300 ease-in-out"
                     style="background-color: #FF6B00;">
-                Удалить услугу
+                Редактировать
             </button>
-        </form>
-    </div>
+
+            <!-- Delete Button -->
+            <form action="{{ route('services-destroy', $service->id) }}" method="POST" onsubmit="return confirm('Вы уверены, что хотите удалить эту услугу?');" class="flex items-center">
+                @csrf
+                @method('DELETE')
+                <button type="submit"
+                        class="text-white font-bold py-2 px-8 rounded-lg flex items-center justify-center w-48 h-12 transition duration-300 ease-in-out"
+                        style="background-color: #FF6B00;">
+                    Удалить услугу
+                </button>
+            </form>
+        </div>
+    @endif
+
 
 
     <!-- Edit Modal -->

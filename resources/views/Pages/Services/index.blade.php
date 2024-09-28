@@ -3,7 +3,7 @@
 @section("content")
     <div class="flex justify-between">
         <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">Услуги</h1>
-        @if(auth()->user() && in_array(auth()->user()->role, ['company_admin', 'office_admin', 'office_manager']))
+        @if(auth()->user() && in_array(auth()->user()->role, ['company_admin']))
             <button id="addServiceBtn" class="shadow appearance-none btn-card py-2 px-4 rounded-lg flex items-center ml-2" style="background-color: #ffffff; color:#123E63">
                 Добавить услугу
             </button>
@@ -28,13 +28,9 @@
 
                 <!-- Button Container -->
                 <div class="flex gap-2"> <!-- Add gap-2 to space between buttons -->
-                    <!-- Order Button -->
-                    <button onclick="openModal('{{ $service->id }}')" class="shadow appearance-none btn-card py-2 px-4 rounded-lg flex items-center" style="background-color: #ffffff; color: #123E63">
-                        Заказать
-                    </button>
 
                     <!-- View Button (Перейти) -->
-                    @if(auth()->user() && in_array(auth()->user()->role, ['company_admin', 'office_admin']))
+                    @if(auth()->user() && in_array(auth()->user()->role, ['company_admin']))
                         <a href="{{ route('services-show', $service->id) }}" class="shadow appearance-none btn-card py-2 px-4 rounded-lg flex items-center" style="background-color: #ffffff; color: #123E63">
                             Перейти
                         </a>
@@ -50,7 +46,42 @@
             <h2 class="text-xl font-bold mb-4" style="color:#123E63">Добавить услугу</h2>
             <form id="serviceForm" action="{{ route('services-store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <!-- Add your form fields here -->
+                <!-- Service Name -->
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700 font-bold mb-2">Название услуги:</label>
+                    <input type="text" id="name" name="name" class="w-full px-4 py-2 border rounded-lg" placeholder="Введите название услуги" required maxlength="255">
+                </div>
+
+                <!-- Service Price -->
+                <div class="mb-4">
+                    <label for="price" class="block text-gray-700 font-bold mb-2">Цена услуги:</label>
+                    <input type="number" id="price" name="price" class="w-full px-4 py-2 border rounded-lg" step="0.01" min="0" placeholder="Введите цену услуги" required>
+                </div>
+
+                <!-- Price Type Dropdown -->
+                <div class="mb-4">
+                    <label for="type" class="block text-gray-700 font-bold mb-2">Тип цены:</label>
+                    <select id="type" name="type" class="w-full px-4 py-2 border rounded-lg" required>
+                        <option value="hour_price">Почасовая цена</option>
+                        <option value="fixed_price">Фиксированная цена</option>
+                        <option value="custom_price">Договорная цена</option>
+                    </select>
+                </div>
+
+                <!-- Upload Image (Optional) -->
+                <div class="mb-4">
+                    <label for="image" class="block text-gray-700 font-bold mb-2">Изображение услуги:</label>
+                    <input type="file" id="image" name="image" class="w-full px-4 py-2 border rounded-lg">
+                </div>
+
+                <!-- Buttons Section -->
+                <div class="flex justify-end gap-4">
+                    <!-- Cancel Button -->
+                    <button type="button" class="px-6 py-2 bg-gray-400 text-white font-bold rounded-lg hover:bg-gray-500" onclick="document.getElementById('serviceModal').classList.add('hidden');">Отмена</button>
+
+                    <!-- Submit Button -->
+                    <button type="submit"  class="px-6 py-2 bg-gray-400 text-white font-bold rounded-lg hover:bg-gray-500" >Добавить услугу</button>
+                </div>
             </form>
         </div>
     </div>

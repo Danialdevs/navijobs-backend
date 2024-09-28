@@ -17,27 +17,23 @@ class ServiceController extends Controller
         return view('Pages.services.index', compact('services', 'companies'));
     }
 
-    public function store(CreateServiceRequest $request){
-
+    public function store(CreateServiceRequest $request) {
         $data = $request->all();
 
         // Check if an image is uploaded
-
         if ($request->hasFile('image')) {
-            // Get the uploaded file
             $image = $request->file('image');
-            // Define the path to the public/images directory
-            $destinationPath = public_path('images');
-            // Define a unique name for the image
             $imageName = time() . '_' . $image->getClientOriginalName();
-            // Move the image to the public/images directory
+            $destinationPath = public_path('images');
             $image->move($destinationPath, $imageName);
-            // Save the path in the database
             $data['image'] = 'images/' . $imageName;
         }
+
+        $data["company_id"] = 1;
+        // Save the service data
         Service::create($data);
 
-        return redirect()->back()->with('success', 'Worker added successfully');
+        return redirect()->back()->with('success', 'Service added successfully');
     }
 
     public function show($id)

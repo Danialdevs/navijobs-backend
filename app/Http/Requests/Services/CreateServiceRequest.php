@@ -15,19 +15,9 @@ class CreateServiceRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'company_id' => 'required|exists:companies,id',
+            'price' => 'required|numeric',
         ];
     }
 
-    /**
-     * Prepare the data for validation.
-     */
-//    protected function prepareForValidation()
-//    {
-//        $this->merge([
-//            'company_id' => $this->user()->company_id, // Add company_id to the request data
-//        ]);
-//    }
+
 }
