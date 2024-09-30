@@ -38,7 +38,7 @@
                     <td class="py-2 px-4 border border-gray-300">{{$application->client->name}}</td>
                     <td class="py-2 px-4 border border-gray-300">{{$application->address}}</td>
                     <td class="py-2 px-4 border border-gray-300">{{$application->created_at}}</td>
-                    <td class="py-2 px-4 border border-gray-300">{{$application->applicationPrices->first()->price}} руб.</td>
+                    <td class="py-2 px-4 border border-gray-300">{{$application->applicationPrices->first()->price}} ₸</td>
                     <td class="py-2 px-4 border border-gray-300">
                         @if($application->status == 'awaiting')
                             В ожидании

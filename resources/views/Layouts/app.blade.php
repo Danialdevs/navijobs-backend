@@ -4,6 +4,7 @@
     <title>Шапка и боковое меню</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=ec876c3e-f46c-4501-abab-33da77c4b228&lang=ru_RU" type="text/javascript"></script>
 </head>
 
 <body class="bg-gray-100 font-sans">
@@ -17,43 +18,6 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Данные для диаграммы (в процентах)
-            const data = {
-                datasets: [{
-                    data: [43, 57],
-                    backgroundColor: ['#EDF2F7', '#FF6B00'],
-                    hoverBackgroundColor: ['#EDF2F7', '#FF6B00']
-                }]
-            };
-
-
-            const options = {
-                responsive: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function (tooltipItem) {
-                                return tooltipItem.raw.toFixed(2) + '%';
-                            }
-                        }
-                    }
-                }
-            };
-
-            // Создание круговой диаграммы
-            const ctx = document.getElementById('myPieChart').getContext('2d');
-            const myPieChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: data,
-                options: options
-            });
-        });
-    </script>
 
     <style>
         .btn-sidebar {

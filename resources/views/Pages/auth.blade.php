@@ -18,10 +18,7 @@
                 <label for="password" class="text-left block text-gray-700 mb-1">Пароль</label>
                 <input placeholder="Пароль" type="password" id="password" name="password" required="" class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-blue-500">
 
-                <div class="flex items-center justify-between mb-4">
-
-                    <a href="#" class="text-sm text-blue-500 hover:underline">Забыли пароль?</a>
-                </div>
+              
                 @if (session('error'))
                     <div class="alert alert-danger">
                         {{ session('error') }}

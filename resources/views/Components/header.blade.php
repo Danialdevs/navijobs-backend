@@ -7,19 +7,19 @@
             <img src="https://i.ibb.co.com/rHs6fTs/Group-75.png" alt="" class="h-12">
         </a>
     </div>
-    <nav class="top-nav flex items-center h-full">
-        <ul class="flex gap-6 items-center">
-            <li><a href="question.html" class="circle p-2 flex items-center justify-center"><i class="fas fa-question-circle"></i></a></li>
-            <li>
-                <a href="notification.html" class="circle p-2 flex items-center justify-center">
-                    <i class="fas fa-bell"></i>
+{{--    <nav class="top-nav flex items-center h-full">--}}
+{{--        <ul class="flex gap-6 items-center">--}}
+{{--            <li><a href="question.html" class="circle p-2 flex items-center justify-center"><i class="fas fa-question-circle"></i></a></li>--}}
+{{--            <li>--}}
+{{--                <a href="notification.html" class="circle p-2 flex items-center justify-center">--}}
+{{--                    <i class="fas fa-bell"></i>--}}
 
-                </a>
-            </li>
+{{--                </a>--}}
+{{--            </li>--}}
 
-            <li><a href="account.html" class="circle p-2 flex items-center justify-center"><i class="fas fa-cog"></i></a></li>
-        </ul>
-    </nav>
+{{--            <li><a href="account.html" class="circle p-2 flex items-center justify-center"><i class="fas fa-cog"></i></a></li>--}}
+{{--        </ul>--}}
+{{--    </nav>--}}
 </header>
 <style>
     .btn-sidebar {

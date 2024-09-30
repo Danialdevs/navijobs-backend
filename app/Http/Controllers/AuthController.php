@@ -18,7 +18,7 @@ class AuthController extends Controller
     {
         $user = Auth::attempt($request->only('email', 'password'));
         if ($user) {
-           return view('Pages/dashboard.index');
+           return \redirect()->route('home');
         } else {
             session()->flash('error', 'Неверные данные для входа.');
 

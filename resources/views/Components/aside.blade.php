@@ -22,7 +22,7 @@
                 <!-- Услуги (Services) page - Visible to non-workers -->
                 <li>
                     <button onclick="window.location.href='{{ route('services-index') }}'" class="btn-sidebar flex items-center">
-                        <img src="{{asset("images/service.svg")}}" class="h-6 w-6" alt="">
+                        <img src="{{asset("images/activity.svg")}}" class="h-6 w-6" alt="">
                         <span class="ml-2">Услуги</span>
                     </button>
                 </li>
